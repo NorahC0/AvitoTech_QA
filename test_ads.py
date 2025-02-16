@@ -3,7 +3,7 @@ import pytest
 
 BASE_URL = "https://qa-internship.avito.com"
 
-# Тест для создания объявления
+
 def test_create_ad():
     seller_id = 660974
     ad_data = {
@@ -16,34 +16,32 @@ def test_create_ad():
             "viewCount": 900
         }
     }
+
     response = requests.post(f"{BASE_URL}/api/1/item", json=ad_data)
     assert response.status_code == 200
     assert "status" in response.json()
 
 
-# Тест для получения объявления по его идентификатору
 def test_get_ad_by_id():
-    ad_id = "3301ca4d-7c21-41b1-aea2-40604ef246fc"  # Замените на реальный ID, полученный из теста создания
+    ad_id = "3301ca4d-7c21-41b1-aea2-40604ef246fc"
     response = requests.get(f"{BASE_URL}/api/1/item/{ad_id}")
     assert response.status_code == 200
-    assert response.json()[0]["id"] == ad_id  # Проверяем, что ID совпадает
+    assert response.json()[0]["id"] == ad_id
 
 
-# Тест для получения всех объявлений по идентификатору продавца
 def test_get_ads_by_seller_id():
     seller_id = 660974
     response = requests.get(f"{BASE_URL}/api/1/{seller_id}/item")
     assert response.status_code == 200
-    assert isinstance(response.json(), list)  # Проверяем, что ответ - это список
+    assert isinstance(response.json(), list)
 
 
-# Тест для получения статистики по айтем id
 def test_get_statistics_by_item_id():
-    ad_id = "df004c6d-4555-4ce7-8c05-83e78640edc6"  # Замените на реальный ID, полученный из теста создания
+    ad_id = "df004c6d-4555-4ce7-8c05-83e78640edc6"
     response = requests.get(f"{BASE_URL}/api/1/statistic/{ad_id}")
     assert response.status_code == 200
-    assert isinstance(response.json(), list) # Проверяем, что в ответе пришел список
-    assert "viewCount" in response.json()[0]  # Проверяем, что в ответе есть поле viewsCount
+    assert isinstance(response.json(), list)
+    assert "viewCount" in response.json()[0]
 
 
 if __name__ == "__main__":
