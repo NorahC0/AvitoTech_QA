@@ -39,7 +39,7 @@ def test_get_ads_by_seller_id():
 
 
 def test_get_statistics_by_item_id():
-    ad_id = "df004c6d-4555-4ce7-8c05-83e78640edc6"
+    ad_id = "3301ca4d-7c21-41b1-aea2-40604ef246fc"
     response = requests.get(f"{BASE_URL}/api/1/statistic/{ad_id}")
     assert response.status_code == 200
     assert isinstance(response.json(), list)
